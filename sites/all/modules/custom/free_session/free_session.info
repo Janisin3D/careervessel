@@ -1,0 +1,6 @@
+; $Id$
+name = Free Session: Registration form for resume session
+description = Captures usernames and emails to register customers for a free session.
+package = Custom Parts
+core = 7.x
+files[] = free_session.module

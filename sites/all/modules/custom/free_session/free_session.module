@@ -1,0 +1,87 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Demonstrates use of the Form API.
+ *
+ * For a full list of elements and attributes, see:
+ * http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/7
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function free_session_menu() {
+  $items['input/examples/more'] = array(
+    //'title' => 'FREE SESSION FOR FEDERAL PUBLIC SERVICE EMPLOYEES',
+    //'description' => 'More complex example with additional form elements and attributes.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('free_session_form'),
+    'access callback' => TRUE,
+    'weight' => 1,
+  );
+  return $items;
+}
+
+/**
+ * A longer form with more elements and attributes.
+ */
+function free_session_form($form, &$form_submit) {
+  $form['info'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h1>' . t('FREE SESSION FOR FEDERAL PUBLIC SERVICE EMPLOYEES</h1>
+                            <h3>Have you been affected by or concerned about <strong>Workforce Adjustment in the Federal Public Service?</strong></h3>
+                            <h3>Are you now in competition for your position with your coworkers and need a solid resume and cover letter?</h3>
+                            <h3>Are you unsure how to highlight your strengths and skills to your department or other departments?</h3>
+                            <h3>If you answered yes to any or all of the questions above, then this workshop is for you!</h3>
+                            <p>A <strong>FREE 2 hour workshop</strong> is being offered by Denise Ryan, public service resume writing expert,
+                            on resume writing and interview preparation in the federal public service.</p>
+                            <p>In this workshop you will learn:</p>
+                            <ul><li>How to create a resume and cover letter that will best represent you, your abilities and experience.</li>
+                            <li>How the first step in the job search process is a concise, relevant resume and cover letter tailored to each and every job application!</li></ul>
+                            <br /><p><em>Denise Ryan, a professional career coach with an expertise in resume writing and interview preparation, facilitates this workshop.
+                            With over 15 years experience in staffing, recruitment and career development within the federal public service,
+                            Denise has an extensive knowledge of public sector hiring practices.</em></p>
+                            <p>Date and Time: To Be Determined</p>
+                            <p>Location: To Be Determined</p>'),
+  );
+  $form['input_name'] = array(
+    '#title' => t('Your first name'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+  );
+  $form['input_email'] = array(
+    '#title' => t('Valid email address'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+    '#description' => 'Your conformation details will be sent to this address',
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Register',
+  );
+  return $form;
+}
+
+
+/**
+ * Validation for free_session_simple_form().
+ */
+function free_session_form_validate($form, &$form_state) {
+  
+  // Check for the color 'blue'.
+  if ($form_state['values']['input_name'] == 'blue') {
+    form_set_error('color', 'Sorry, your favorite color is actually yellow.');
+  }
+}
+
+
+/**
+ * Submit function for free_session_simple_form().
+ */
+function free_session_input_form_submit($form, &$form_state) {
+  
+  // Display a message upon successful submission.
+  drupal_set_message(t("I like @color, too!", array('@color' => $form_state['values']['color'])));
+}
