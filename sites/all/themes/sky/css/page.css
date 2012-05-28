@@ -40,6 +40,10 @@ div#tasks,
 }
 #columns {
   background: #fff;
+/** -moz-box-shadow: 0 0 5px 5px #D37C24;
+*  -webkit-box-shadow: 0 0 5px 5px #D37C24;
+*  box-shadow: 0 0 5px 5px #D37C24;
+*/
 }
 .columns-inner {
   padding-top: 20px;
